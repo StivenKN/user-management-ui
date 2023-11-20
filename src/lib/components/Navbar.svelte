@@ -1,9 +1,27 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte'
+	import { onDestroy, onMount } from 'svelte'
+	let scrollY = 0
+	let isScrolled = false
+
+	const scrollAddFixed = () => {
+		scrollY = window.scrollY
+		console.log(scrollY)
+		if (window.scrollY > 80) {
+			isScrolled = true
+		} else {
+			isScrolled = false
+		}
+	}
+
+	onMount(() => {
+		window.addEventListener('scroll', scrollAddFixed)
+	})
+
 	export let isLogged: boolean
 </script>
 
-<div class="navbar bg-base-200">
+<div class="navbar bg-base-200 z-50 transition-all" class:fixed={isScrolled}>
 	<div class="navbar-start">
 		<div class="dropdown">
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -36,7 +54,7 @@
 				</li>
 			</ul>
 		</div>
-		<a href="/"><Icon icon="iconoir:database-solid" height={25} width={25} /></a>
+		<a href="/" class="pl-3"><Icon icon="iconoir:database-solid" height={25} width={25} /></a>
 	</div>
 	<div class="navbar-center hidden lg:flex">
 		<ul class="menu menu-horizontal px-1">

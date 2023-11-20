@@ -2,9 +2,9 @@
 	import '../app.postcss'
 	import type { LayoutData } from './$types'
 	import Navbar from '$lib/components/Navbar.svelte'
+	import Footer from '$lib/components/Footer.svelte'
 	import { page } from '$app/stores'
 	import { ToastContainer, FlatToast } from 'svelte-toasts'
-
 	export let data: LayoutData
 </script>
 
@@ -18,7 +18,10 @@
 >
 	<FlatToast {data} />
 </ToastContainer>
-{#if $page.route.id !== '/login'}
+{#if $page.route.id !== '/login' && $page.route.id !== '/register'}
 	<Navbar isLogged={data.isLogged} />
 {/if}
 <slot />
+{#if $page.route.id !== '/login' && $page.route.id !== '/register'}
+	<Footer />
+{/if}

@@ -6,7 +6,11 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			height: {
+				'90vh': '90vh'
+			}
+		}
 	},
 	daisyui: {
 		themes: ['light', 'dark', 'dim', 'dracula']
